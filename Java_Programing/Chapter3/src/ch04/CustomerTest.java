@@ -17,9 +17,12 @@ public class CustomerTest {
 		System.out.println(customerKim.showCustomerInfo() + price);
 		
 		// 상위 클래스로 변수를 선언하고 하위 클래스의 생성자로 인스턴스를 생성할 수 있다.
-//		Customer vc = new VIPCustomer(12345, "noname");
 		// 하지만 상위클래스의 요소들만 사용이 가능하다.
-//		System.out.println(vc.salesRatio);
+//		System.out.println(vc.salesRatio); 오류
+		Customer vc = new VIPCustomer(12345, "noname");
+		vc.bonusPoint = 10000;
+		int priceNo = vc.calcPrice(10000);
+		System.out.println(vc.showCustomerInfo() + "지불금액은 " + priceNo);
 		
 	}
 }
