@@ -1,0 +1,62 @@
+Object 클래스    
+
+java.lang 패키지  
+프로그래밍시 import하지 않아도 자동으로 import됨.  
+많이 사용하는 기본 클래스들이 속한 패키지  
+String, Integer, System 등등    
+
+모든 클래스는 Object를 상속 받는다  
+java.lang.Object 클래스  
+모든 클래스는 Object에서 상속받고  
+Object 클래스의 메서드 중 일부는 재정의해서 사용할 수 있음  
+컴파일러가 extends Object를 추가해준다.    
+
+Object클래스의 매서드활용  
+equals() 메서드  
+두 인스턴스의 주소 갑을 비교하여 true/false를 반환  
+재정의하여 두 인스턴스가 논리적으로 동일함의 여부를 구분한다.  
+인스턴스가 다르더라도 논리적으로 동일한 경우 true를 반환하도록 재정의가 가능하다.    
+
+hashCode() 메서드  
+hashCode()는 인스턴스의 저장 주소를 반환한다.  
+힙메모리에 인스턴스가 저장되는 방식이 hash방식.  
+hash : 정보를 저장, 검색하는 자료구조  
+자료의 특정 값(키 값)에 대한 저장 위치를 반환해주는 해시 함수를 사용    
+
+clone() 메서드  
+객체의 원본을 복제하는데 사용하는 메서드  
+생성과정의 복잡한 과정을 반복하지 않고 복제 할 수 가 있다.  
+clone() 메서드를 사용하면 객체의 정보가 동일한 또 다른 인스턴스가 생성되는 것이므로, 객체지향 프로그램에서의 정보은닉, 객체보호의 관점에서 위배될 수 있다.  
+해당 클래스의 clone()메서드의 사용을 허용한다는 의미로 doneable 인터페이스를 선언해줌    
+  
+
+String, StringBuilder, StringBuffer 클래스, text block    
+
+String클래스  
+한번 생성된 String은 불변  
+String을 연결하면 기존의 String에 연결되는 것이 아닌, 새로운 문자열이 생성된다.    
+
+StringBuilder, StringBuffer  
+내부적으로 가변적인 char[]를 맴버 변수로 가진다.  
+물자열을 여러번 연결하거나 변경할때 사용하면 유용함.  
+새로운 인스턴스를 생성하지 않고 char[] 를 변경함.  
+toString() 메서드로 String 변환    
+
+StringBuilder  
+단일쓰레드를 할 때는 StringBuilder    
+
+StringBuffer  
+멀티쓰레드를 할 때는 StringBuffer  
+StringBuffer는 멀티 쓰레드 프로그래밍에서 동기화를 보장      
+
+
+Class 클래스    
+
+자바의 모든 클래스와 인터페이스는 컴파일 후 class파일이 생성된다.  
+Class 클래스는 컴파일 된 class파일을 로드하여 객체를 동적 로드하고, 정보를 가져오는 메서드가 제공됨  
+Class.forName("클래스 이름") 메서드로 클래스를 동적으로 로드함.    
+
+동적로딩  
+컴파일 시에 데이터 타입이 binding 되는 것이 아닌, 실행중에 데이터 타입을 binding 하는 방법.  
+프로그래밍 시에는 문자열 변수로 처리했다가 런타임시에는 원하는 클래스를 로딩하여 bindi ng 할 수 있나는 장점이 있다.  
+컴파일 시에 타입이 정해지지 않으므로 동적 로딩시 오류가 발생하면 프로그램의 심각한 장애가 발생 가능하다.  
