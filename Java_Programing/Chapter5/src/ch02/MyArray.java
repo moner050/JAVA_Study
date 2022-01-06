@@ -24,7 +24,7 @@ public class MyArray {
 		intArr = new int[size];
 	}
 	
-	// 
+	// 매개변수를 받아 배열에 더해줌.
 	public void addElement(int num)
 	{
 		if(count >= ARRAY_SIZE)
@@ -86,6 +86,16 @@ public class MyArray {
 		return ret;
 	}
 	
+	// 해당 배열의 인덱스에 있는 값 리턴
+	public int getElement(int position)
+	{
+		if( position < 0 || position > count - 1 )
+		{
+			return ERROR_NUM;
+		}
+		return intArr[position];
+	}
+	
 	// count의 값이 얼마인지
 	public int getSize()
 	{
@@ -105,5 +115,18 @@ public class MyArray {
 		}
 	}
 	
-	
+	// 배열 전체 출력.
+	public void printAll()
+	{
+		if( count == 0)
+		{
+			System.out.println("출력할 내용이 없습니다.");
+			return;
+		}
+		
+		for(int i = 0; i < count; i++)
+		{
+			System.out.println(intArr[i]);
+		}
+	}
 }
