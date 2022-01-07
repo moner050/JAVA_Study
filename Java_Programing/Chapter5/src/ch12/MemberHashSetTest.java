@@ -4,7 +4,7 @@ public class MemberHashSetTest {
 
 	public static void main(String[] args) {
 
-		// MemberArrayList 의 인스턴스 생성
+		// MemberHashSet 의 인스턴스 생성
 		MemberHashSet memberHashSet = new MemberHashSet();
 		
 		// Member 의 인스턴스들을 생성
@@ -12,7 +12,7 @@ public class MemberHashSetTest {
 		Member memberKim = new Member(1002, "김유신");
 		Member memberKang = new Member(1003, "강감찬");
 		
-		// 맴버 리스트에 멤버 인스턴스를 순서대로 넣어준다.
+		// memberHashSet에 멤버 인스턴스를 순서대로 넣어준다.
 		memberHashSet.addMember(memberLee);
 		memberHashSet.addMember(memberKim);
 		memberHashSet.addMember(memberKang);
