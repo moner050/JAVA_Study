@@ -1,4 +1,4 @@
-package ch07;
+package ch06;
 
 import java.util.Arrays;
 import java.util.function.BinaryOperator;
@@ -29,5 +29,5 @@ public class ReduceTest {
 		String str = Arrays.stream(greetings).reduce(new CompareString()).get();
 		System.out.println(str);
 	}
-
+ 
 }
