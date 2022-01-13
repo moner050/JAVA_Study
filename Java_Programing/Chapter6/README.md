@@ -116,3 +116,84 @@ jre/lib/logging.properties 파일을 편집하여 로그 출력방식, 로그 �
 logging 패키지에서 제공하는 로그 레벨은 Exception상황일때(serve, warning), 정보를 남겨줘야함(info), 별 문제가 없는(config, fine, finer, finest) 이다.  
 오픈소스로는 log4j를 많이 사용하고 있다.(최근 보안문제가 발생했지만)    
 
+입출력 스트림    
+
+네트워크에서 자료의 흐름이 물의 흐름과 같다는 비유에서 유래됨  
+자바는 다양한 입출력 장치에 독립적으로 일관성 있는 입출력을 입출력 스트림을 통해 제공한다.  
+입출력이 구현되는 곳 : 파일 디스크, 마우스, 네트윅, 메모리 등 모든 자료가 입력되고 출력되는 곳  
+하나의 스트림으로 입/출력을 동시에 사용할 수는 없다.  
+입출력 스트림의 구분  
+대상 기준 : 입력 스트림 / 출력 스트림  
+자료의 종류 : 바이트 스트림 / 문자 스트림  
+바이트 단위 스트림 : 동영상, 음악파일 ,실행파일등의 자료를 읽고 쓸 때 사용한다  
+문자 단위 스트림 : 바이트 단위로 자료를 처리하면 문자는 깨진다. 인코딩에 맞게 2바이트 이상으로 처리하도록 구현된 스트림    
+
+기능 : 기반 스트림 / 보조 스트림  
+기반 스트림 : 대상에 직접 자료를 읽고 쓰는 기능의 스트림  
+보조 스트림 : 직접 읽고 쓰는 기능은 없이 추가적인 기능을 더해주는 스트림.  
+보조스트림은 직접 읽고 쓰는 기능은 없으므로 항상 기반 스트림이나 또 다른 보조 스트림을 생성자의 매개변수로 포함한다.    
+
+직렬화(Serialization)    
+
+인스턴스의 상태를 그대로 파일 저장하거나 네트윅으로 전송하고 이를 다시 복원하는 방식  
+자바에서는 보조 스트림을 활용하여 직렬화를 제공한다.    
+
+직렬화(Serialization) 인터페이스  
+직렬화는 인스턴스의 내용이 외부로 유출되는 것이므로 프로그래머가 해당 객체에 대한 직렬화 의도를 표시해야 한다.  
+구현 코드가 없는 make interface  
+transient : 직렬화 하지 않으려는 맴버 변수에 사용함.(Socket 등 직렬화 할 수 없는 객체)    
+
+데코레이터 패턴(Decorator Pattern)    
+
+자바의 입출력 스트림은 Decorator Pattern 이다.  
+여러 decorator들을 활용하여 다양한 기능을 제공해준다.  
+상속보다 유연한 구현 방식  
+데코레이터는 다른 데코레이터나 또는 컴포넌트를 포함해야 한다.  
+지속적인 기능의 추가와 제거가 용이함.  
+decorator와 component는 동일하지않다. (기반 스트림 클래스가 직접 읽고 쓸 수 있음. 보조 스트림은 추가적인 기능 제공)    
+
+쓰레드(Thread)    
+
+process : 실행 중인 프로그램 프로그램이 실행되면 OS로 부터 메모리를 할당받아 프로세스 상태가 됨.  
+thread : 하나의 프로세스는 하나 이상의 thread를 가지게 되고, 실제 작업을 수행하는 단위는 thread이다.    
+
+멀티 쓰레딩(Multi-Threading)  
+여러 thread가 동시에 수행되는 프로그래밍. 여러 작업이 동시에 실행되는 효과가 있다.  
+thread는 각각 자신만의 작업공간을 가진다( context )  
+각 thread 사이에서 공유하는 자원이 있을 수 있음.( 자바에서는 static instance)  
+여러 thread가 자원을 공유하여 작업이 수행되는 경우 서로 자원을 차지하려는 race condition이 발생할 수 있음  
+이렇게 여러 thread가 공유하는 자원 중 경쟁이 발생하는 부분을 critical section이라고 한다.  
+critical section에 대한 동기화(일종의 순차적 수행)를 구현하지 않으면 오류가 발생할 수 있다.    
+
+join()  
+동시에 두 개 이상의 Thread가 실행 될 때 다름 Thread의 결과를 참조하여 실행해야 하는 경우 join()함수를 사용한다.  
+join() 함수를 호출한 Thread가 not-runnable 상대로 간다.  
+다른 Thread의 수행이 끝나면 runnable 상태로 돌아온다.    
+
+interrupt()  
+다른 Thread에 예외를 발생시키는 interrupt 를 보낸다.  
+Thread가 join(), sleep(), wait() 함수에 의해 not-runnable 상태일 때 interrupt() 메서드를 호출하면 다시 runnable상태가 될 수 있다.    
+
+critical section과 semaphore  
+critical section은 두 개 이상의 thread가 동시에 접근하는 경우 문제가 생길 수 있기 때문에 동시에 접근할 수 없는 영역이다  
+semaphore는 특별한 형태의 시스템 객체이며 get/release 두 개의 기능이 있다.  
+한 순간 오직 하나의 thread만이 semaphore를 얻을 수 있고 나머지 thread들은 대기(blocking) 상태가 된다.  
+semaphore를 얻은 thread만이 critical section에 들어갈 수 있다.    
+
+동기화 (synchronized)  
+두개의 thread가 같은 객체에 접근할 경우, 동시에 접근함으로 써 오류가 발생함.  
+동기화는 임계영역에 접근한 경우 공유자원을 lock하여 다른 thread들의 접근을 제어한다.  
+동기화를 잘못 구현하면 deadlock에 빠질 수 있다.    
+
+synchronized 메서드  
+객체의 메소드에 synchronized 키워드 사용  
+현재 이 메서드가 속해있는 객체에 lock을 건다.  
+자바에서는 deadlock을 방지하는 기술이 제공되지 않으므로 되도록이면 synchronized 메서드에서 다른 synchronized 메서드는 호출하지 않도록 한다.    
+
+wait()/notify() 에서드를 활용한 동기화 프로그래밍  
+리소스가 어떤 조건에서 더 이상 유효하지 않은 경우 리소스를 기다리기 위해 Thread가 wait() 상태가 된다.  
+wait() 상태가 된 Thread는 notify()가 호출 될 때 까지 기다린다.  
+유효한 자원이 생기면 notify()가 호출되고 wait() 하고 있는 Thread중 무작위로 하나의 Thread를 재시작 하도록 한다.  
+notifyAll()이 호출되는 경우 wait() 하고있는 모든 Thread가 재시작된다.  
+이 경유 유효한 리소스만큼의 Thread만이 수행될 수 있고 자원을 갖지 못한 Thread의 경우 다시 wait()상태로 만든다.  
+자바에서는 notifyAll() 메서드의 사용을 권장한다.    
