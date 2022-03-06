@@ -1,4 +1,4 @@
-package ConditionalSentence;
+package conditionalSentence;
 
 public class Sortation {
 
