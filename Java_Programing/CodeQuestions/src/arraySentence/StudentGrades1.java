@@ -1,4 +1,4 @@
-package ArraySentence;
+package arraySentence;
 
 import java.util.Random;
 

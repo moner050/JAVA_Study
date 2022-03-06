@@ -1,4 +1,4 @@
-package ArraySentence;
+package arraySentence;
 
 public class NoviceArray {
 
