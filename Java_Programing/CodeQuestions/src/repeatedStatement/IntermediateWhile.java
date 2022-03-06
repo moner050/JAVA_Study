@@ -1,4 +1,4 @@
-package RepeatedStatement;
+package repeatedStatement;
 
 public class IntermediateWhile {
 

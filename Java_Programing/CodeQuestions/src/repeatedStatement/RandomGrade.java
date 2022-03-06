@@ -1,4 +1,4 @@
-package RepeatedStatement;
+package repeatedStatement;
 
 import java.util.Random;
 
