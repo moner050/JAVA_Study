@@ -1,0 +1,108 @@
+package list;
+
+import ch02.list.IList;
+import ch02.list.MyArrayList;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class MyArrayListTest {
+
+    @Test
+    public void add()
+    {
+        IList<Integer> given = new MyArrayList<>();
+
+        for(int i = 0; i < 50; i++)
+        {
+            System.out.println(i);
+            given.add(i);
+            assertEquals(i + 1, given.size());
+            assertEquals(i, given.get(i));
+        }
+    }
+
+    @Test
+    public void insert()
+    {
+        IList<Integer> given = new MyArrayList<>();
+
+        // 일단 50개 채워두고
+        for(int i = 0; i < 50; i++)
+        {
+            System.out.println(i);
+            given.add(i);
+            assertEquals(i + 1, given.size());
+            assertEquals(i, given.get(i));
+        }
+
+        // 30번째 인덱스에 666을 삽입.
+        given.insert(30, 666);
+
+        // 사이즈가 50이 넘었으니 두배로 된지 확인
+        assertEquals(100, given.elementSize());
+
+        // 30번째 인덱스에 666이 들어있나 확인
+        assertEquals(666, given.get(30));
+    }
+
+
+    @Test
+    public void clear()
+    {
+        IList<Integer> given = new MyArrayList<>();
+        for(int i = 0; i < 100; i++)
+        {
+            given.add(i);
+        }
+        // 100개가 담겼나 확인
+        assertEquals(100, given.size());
+        // 초기화
+        given.clear();
+        // 0개가 담겼나 확인
+        assertEquals(0, given.size());
+    }
+
+    @Test
+    public void delete()
+    {
+        IList<Integer> given = new MyArrayList<>();
+
+        // given 배열에 0부터 49 채워넣기
+        for(int i = 0; i < 50; i++)
+        {
+            given.add(i);
+        }
+        // given 에 값이 30인 값의 인덱스를 찾아 삭제
+        given.delete(30);
+
+        // 값을 삭제했으니 given 의 사이즈가 줄어들었나 확인
+        assertEquals(49, given.size());
+
+        // 값이 정말 삭제되었나 확인 (삭제되었으면 배열에 30이 없으니 -1 리턴됌)
+        assertEquals(-1, given.indexOf(30));
+    }
+
+    @Test
+    public void deleteByIndex()
+    {
+        IList<Integer> given = new MyArrayList<>();
+
+        // given 배열에 0부터 49 채워넣기
+        for(int i = 0; i < 50; i++)
+        {
+            given.add(i);
+        }
+
+        // 10번 인덱스 삭제하기(9 삭제)
+        given.deleteByIndex(10);
+
+        // 사이즈가 줄어들었나 확인
+        assertEquals(49, given.size());
+
+        // 10번 인덱스가 삭제되었나 확인(삭제되었으면 배열에 9이 없으니 -1 리턴됌)
+        assertEquals(-1, given.indexOf(10));
+    }
+
+}

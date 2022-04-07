@@ -21,4 +21,6 @@ public interface IList<T> {
     boolean contains(T t);
 
     int size();
+
+    int elementSize();
 }
