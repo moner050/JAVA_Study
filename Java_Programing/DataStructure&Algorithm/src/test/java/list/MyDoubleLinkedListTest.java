@@ -100,7 +100,7 @@ public class MyDoubleLinkedListTest {
         // 10번 인덱스에 있던 값이 있나 확인 (없으면 -1 리턴)
         assertEquals(-1, given.indexOf(10));
 
-        // 10인 값이 있나 확인 (없으면 false 리턴)
+        // 10인 값이 있나 확인 (없으면 false 리턴):
         assertEquals(false, given.contains(10));
     }
 }
