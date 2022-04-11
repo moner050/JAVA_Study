@@ -1,6 +1,8 @@
 package ch03;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Stack;
 
 public class BJ_9012 {
@@ -15,10 +17,7 @@ public class BJ_9012 {
         {   // c 에 s 의 문자열 한글자씩 넣기.
             char c = s.charAt(i);
             // ( 가 들어오면 push
-            if(c == '(')
-            {
-                stack.push(c);
-            }
+            if(c == '(') stack.push(c);
             else
             {   // 스택의 사이즈가 0이면 No 출력 후 종료
                 if(stack.size() < 1)
@@ -26,8 +25,7 @@ public class BJ_9012 {
                     System.out.println("NO");
                     return;
                 }
-                // 아니면 pop
-                stack.pop();
+                else stack.pop(); // 아니면 pop
             }
             i++;
         }
@@ -37,15 +35,15 @@ public class BJ_9012 {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        Scanner scan = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int T = scan.nextInt();
+        int T = Integer.parseInt(br.readLine());
 
         for(int i = 0; i < T; i++)
         {
-            foo(scan.next());
+            foo(br.readLine());
         }
     }
 }
