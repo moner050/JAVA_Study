@@ -12,7 +12,7 @@ public class MergeSort implements ISort{
     {
         if(low >= high)
         {
-
+            return;
         }
 
         int mid = low + ((high - low) / 2);
