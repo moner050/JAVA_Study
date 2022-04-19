@@ -22,7 +22,7 @@ public class MemberTreeSetTest {
 
 	public static void main(String[] args) {
 
-		/*
+
 		// MemberTreeSet 의 인스턴스 생성
 		MemberTreeSet memberTreeSet = new MemberTreeSet();
 		
@@ -40,7 +40,7 @@ public class MemberTreeSetTest {
 		
 
 		memberTreeSet.showAllMember();
-		 */
+
 		
 		// 비교방식을 추가해줘야한다. new MyCompare()
 		TreeSet<String> set = new TreeSet<String>(new MyCompare());

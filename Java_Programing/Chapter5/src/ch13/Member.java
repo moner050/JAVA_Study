@@ -79,9 +79,9 @@ public class Member implements Comparator<Member>{
 	@Override
 	public int compare(Member member1, Member member2) {
 		// 오름차순
-//		return (member1.memberId - member2.memberId);
+		return (member1.memberId - member2.memberId);
 		// 내림차순
-		return (member2.memberId - member1.memberId);
+//		return (member2.memberId - member1.memberId);
 	}
 	
 	
