@@ -28,7 +28,7 @@ public class BJ_10866 {
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+        StringBuilder sb = new StringBuilder();
         Deque<Integer> deque = new LinkedList<>();  // 편하게 하기위해 Deque 인터페이스 선언
 
         Integer N = Integer.parseInt(br.readLine());    // 몇번 입력 받을껀지 N에 Integer 형태로 값 넣어주기.
@@ -47,31 +47,32 @@ public class BJ_10866 {
                     deque.addLast(Integer.valueOf(input[1]));
                     break;
                 case "pop_front":   // pop_front 이면 deque 의 맨앞의 수 출력후 삭제 (비어있으면 -1)
-                    if(deque.isEmpty()) System.out.println("-1");
-                    else System.out.println(deque.removeFirst());
+                    if(deque.isEmpty()) sb.append(-1 + "\n");
+                    else sb.append(deque.removeFirst() + "\n");
                     break;
                 case "pop_back":    // pop_back 이면 deque 의 맨뒤의 수 출력후 삭제 (비어있으면 -1)
-                    if(deque.isEmpty()) System.out.println("-1");
-                    else System.out.println(deque.removeLast());
+                    if(deque.isEmpty()) sb.append(-1 + "\n");
+                    else sb.append(deque.removeLast() + "\n");
                     break;
                 case "size":    // size 이면 deque 의 사이즈 출력
-                    System.out.println(deque.size());
+                    sb.append(deque.size() + "\n");
                     break;
                 case "empty":   // empty 이면 비어있을때 1 안비어있을때 0 출력
-                    if(deque.isEmpty()) System.out.println("1");
-                    else System.out.println("0");
+                    if(deque.isEmpty()) sb.append("1" + "\n");
+                    else  sb.append("0" + "\n");
                     break;
                 case "front":   // front 이면 deque 의 맨앞의 수 출력 (비어있으면 -1)
-                    if(deque.isEmpty()) System.out.println("-1");
-                    else System.out.println(deque.peekFirst());
+                    if(deque.isEmpty()) sb.append("-1" + "\n");
+                    else sb.append(deque.peekFirst() + "\n");
                     break;
                 case "back":    // back 이면 deque 의 맨뒤의 수 출력 (비어있으면 -1)
-                    if(deque.isEmpty()) System.out.println("-1");
-                    else System.out.println(deque.peekLast());
+                    if(deque.isEmpty()) sb.append("-1" + "\n");
+                    else sb.append(deque.peekLast() + "\n");
                     break;
                 default:
                     break;
             }
         }
+        System.out.println(sb);
     }
 }
