@@ -1,39 +1,35 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.ArrayList;
 
-public class test {
+public class QueueTest<T> {
 
-    public static void main(String[] args) throws IOException {
+    private ArrayList<T> queue = new ArrayList<T>();
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public void enqueue(T item)
+    {
+        queue.add(item);
+    }
 
-        Queue<Integer> queue = new LinkedList<Integer>();
+    public T dequeue()
+    {
+        if(queue.isEmpty()) return null;
+        else return queue.remove(0);
+    }
 
-        int n = 3;
-        for(int i = 1; i <= n; i++)
-        {
-            queue.add(i);
-        }
+    public boolean isEmpty()
+    {
+        if(queue.size() == 0) return true;
+        else return false;
+    }
 
-        while(n-- > 0)
-        {
-            String[] input = br.readLine().split(" ");
-            switch(input[0])
-            {
-                case "enqueue":
-                    queue.add(Integer.valueOf(input[1]));
-                    System.out.println(queue);
-                    break;
-                case "dequeue":
-                    queue.remove();
-                    System.out.println(queue);
-                    break;
-                default:
-                    break;
-            }
-        }
+    public static void main(String[] args)
+    {
+        QueueTest<Integer> qt = new QueueTest<>();
+
+        qt.enqueue(1);
+        qt.enqueue(10);
+        qt.enqueue(100);
+        System.out.println(qt.dequeue());
+        System.out.println(qt.dequeue());
+        System.out.println(qt.dequeue());
     }
 }
