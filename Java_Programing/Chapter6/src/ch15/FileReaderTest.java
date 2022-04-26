@@ -12,14 +12,14 @@ public class FileReaderTest {
 			int i;
 			while( (i = fr  .read()) != -1 )
 			{
-				System.out.println((char)i);
+				System.out.print((char)i);
 			}
 		}
 		catch(IOException e)
 		{
 			System.out.println(e);
 		}
-		System.out.println("END");
+		System.out.println("\nEND");
 		
 	}
 
