@@ -15,7 +15,9 @@ public class MemberDao {
 	private ResultSet rs = null;
 	
 	// 회원 목록
-	private String MEMBER_LIST = "select MEMBER_ID, NAME, PHONE_NUMBER from member";
+	private String MEMBER_LIST = "select MEMBER_ID, NAME, PHONE_NUMBER from MEMBER";
+	// 회원 상세 목록
+	private String MEMBER_FOCUS = "select MEMBER_ID from MEMBER";
 	// 회원 등록
 	private String INSERT_MEMBER = "insert into MEMBER values(?, ?, ?)";
 	// 회원 수정
@@ -87,6 +89,32 @@ public class MemberDao {
     	}
     }
     
+    // 회원 상세 목록
+    public boolean equalMember(String member_id)
+    {	// 똑같은 값이 있으면 true 리턴
+    	try 
+    	{
+    		conn = JDBCUtil.getConnection();
+			ps = conn.prepareStatement(MEMBER_FOCUS);
+			rs = ps.executeQuery();
+			boolean check = false;
+			while(rs.next())
+			{
+				String chk_member_name = rs.getString("MEMBER_ID");
+				if(chk_member_name.equals(member_id)) check = true;
+			}
+			return check;
+    	} 
+    	catch (SQLException e) 
+    	{
+    		return false;
+    	} 
+    	finally 
+    	{
+    		MemberDao.close(ps, conn);
+    	}
+    }
+    
     // 회원 등록
     public boolean insertMember(String member_id, String name, String phone_number)
     {
@@ -102,7 +130,6 @@ public class MemberDao {
     	} 
     	catch (SQLException e) 
     	{
-    		e.printStackTrace();
     		return false;
     	} 
     	finally 
