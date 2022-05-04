@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Programing/JAVA_Study/Java_Programing/JavaProgrammingToyProject/h2-2.1.210.jar"/>
+	<classpathentry kind="lib" path="D:/Programing/JAVA_Study/JavaProgrammingToyProject/h2-2.1.210.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
