@@ -1,4 +1,4 @@
-package com.my.project.jsp_test_intellij;
+package com.my.web.user;
 
 import java.io.*;
 import javax.servlet.http.*;
