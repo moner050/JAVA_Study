@@ -17,7 +17,10 @@ public class UserDAO {
 	
 	// 회원 목록
 	private final String USER_LIST = "select * from USERS order by id desc";
+	// 회원 조회
 	private final String USER_GET = "select * from USERS where id = ?";
+	// 회원 등록
+	private final String USER_INSERT = "INSERT INTO USERS VALUES(?, ?, ?, ?)";
 	
     // 회원 목록
     public List<UserVO> getUserList()
@@ -83,7 +86,30 @@ public class UserDAO {
     	}
     	return user;
     }
-
     
+    // 회원 등록
+	public boolean insertUsers(String id, String password, String name, String role)
+	{
+		try
+		{
+    		conn = JDBCUtil.getConnection();
+			ps = conn.prepareStatement(USER_INSERT);
+			ps.setString(1, id);
+			ps.setString(2, password);
+			ps.setString(3, name);
+			ps.setString(4, role);
+			ps.executeUpdate();
+			return true;
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+    	finally 
+    	{
+    		JDBCUtil.close(ps, conn);
+    	}
+	}
 	
 }
