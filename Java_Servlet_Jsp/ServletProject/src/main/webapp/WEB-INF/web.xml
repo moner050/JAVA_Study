@@ -9,7 +9,12 @@
 		<welcome-file>login.html</welcome-file>
 	</welcome-file-list>
 	
-	<servlet>
+	<context-param>
+		<param-name>encoding</param-name>
+		<param-value>UTF-8</param-value>
+	</context-param>
+	
+<!-- 	<servlet>
 		<servlet-name>insertUser</servlet-name>
 		<servlet-class>com.my.web.user.InsertUserServlet</servlet-class>
 		<init-param>
@@ -26,5 +31,5 @@
 		<servlet-name>insertUser</servlet-name>
 		<url-pattern>/insertUser.do</url-pattern>
 	</servlet-mapping>
-	
+	 -->
 </web-app>

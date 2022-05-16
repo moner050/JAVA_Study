@@ -88,23 +88,21 @@ public class UserDAO {
     }
     
     // 회원 등록
-	public boolean insertUsers(String id, String password, String name, String role)
+	public void insertUsers(UserVO vo)
 	{
 		try
 		{
     		conn = JDBCUtil.getConnection();
 			ps = conn.prepareStatement(USER_INSERT);
-			ps.setString(1, id);
-			ps.setString(2, password);
-			ps.setString(3, name);
-			ps.setString(4, role);
+			ps.setString(1, vo.getId());
+			ps.setString(2, vo.getPassword());
+			ps.setString(3, vo.getName());
+			ps.setString(4, vo.getRole());
 			ps.executeUpdate();
-			return true;
 		}
 		catch(SQLException e)
 		{
 			e.printStackTrace();
-			return false;
 		}
     	finally 
     	{
