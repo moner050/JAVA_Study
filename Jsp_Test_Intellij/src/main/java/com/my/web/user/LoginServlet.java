@@ -29,27 +29,24 @@ public class LoginServlet extends HttpServlet {
 
         // 3. 응답화면 구성
         // 출력 스트림을 얻기 전에 인코딩을 처리한다.
-        response.setContentType("text/html; charset=UTF-8");
+//        response.setContentType("text/html; charset=UTF-8");
         // HTTP 응답 프로토콜 Message-Body 와 연결된 출력스트림을 획득한다.
-        PrintWriter out = response.getWriter();
+//        PrintWriter out = response.getWriter();
+
         if(user != null)
         {
             if(user.getPassword().equals(vo.getPassword()))
             {
-                out.println(user.getName() + "님 로그인 환영합니다. <br>");
-                out.println("<a href='/getBoardList.do>글 목록 바로가기</a>");
+                response.sendRedirect("getBoardList.do");
             }
             else	// 비밀번호 오류일 때
             {
-                out.println("비밀번호 오류입니다. <br>");
-                out.println("<a href='/login.html>다시 로그인</a>");
+                response.sendRedirect("login.html");
             }
         }
         else	// 아이디에 해당하는 회원이 없는 경우
         {
-            out.println("입력하신 아이디에 해당하는 회원이 없습니다. <br>");
-            out.println("<a href='/login.html>다시 로그인</a>");
-
+            response.sendRedirect("login.html");
         }
 
     }
