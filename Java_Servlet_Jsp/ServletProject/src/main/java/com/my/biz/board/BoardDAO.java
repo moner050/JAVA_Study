@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
+
 import com.my.biz.user.common.JDBCUtil;
 
 public class BoardDAO {
@@ -17,6 +19,8 @@ public class BoardDAO {
 	private ResultSet rs;
 	
 	// SQL 명령어(SELECT MAX(SEQ) + 1 FROM BOARD)
+	// 게시글 처음 등록
+	private final String BOARD_INSERT_FIRST = "INSERT INTO BOARD(SEQ, TITLE, WRITER, CONTENT) VALUES(1, ?, ?, ?)";
 	// 게시글 등록
 	private final String BOARD_INSERT = "INSERT INTO BOARD(SEQ, TITLE, WRITER, CONTENT) VALUES((SELECT MAX(SEQ) + 1 FROM BOARD), ?, ?, ?)";
 	// 게시글 업데이트
@@ -42,10 +46,25 @@ public class BoardDAO {
 			stmt.setString(3, vo.getContent());
 			stmt.executeUpdate();
 		} 
+		catch (JdbcSQLIntegrityConstraintViolationException e)
+		{
+			try 
+			{
+				stmt = conn.prepareStatement(BOARD_INSERT_FIRST);
+				stmt.setString(1, vo.getTitle());
+				stmt.setString(2, vo.getWriter());
+				stmt.setString(3, vo.getContent());
+				stmt.executeUpdate();
+			} 
+			catch (SQLException e1) 
+			{
+				e1.printStackTrace();
+			}
+		}
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
-		} 
+		}
 		finally 
 		{
 			JDBCUtil.close(stmt, conn);
