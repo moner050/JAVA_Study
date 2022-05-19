@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
 
-import com.my.biz.user.common.JDBCUtil;
+import com.my.biz.user.filter.JDBCUtil;
 
 public class BoardDAO {
 
@@ -31,7 +31,6 @@ public class BoardDAO {
 	private final String BOARD_LIST = "SELECT * FROM BOARD ORDER BY SEQ desc";
 	// 게시글 조회
 	private final String BOARD_GET = "SELECT * FROM BOARD WHERE SEQ = ?";
-
 	
 	
 	// CRUD 기능의 메소드
@@ -174,5 +173,6 @@ public class BoardDAO {
 		}
 		return boardList;
 	}
+
 	
 }

@@ -17,17 +17,10 @@ import com.my.biz.board.BoardVO;
 @WebServlet(urlPatterns = "/updateBoard.do")
 public class UpdateBoardServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-	private String encoding;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	throws ServletException, IOException {
-
-		// 인코딩 설정
-		ServletContext context = getServletContext();
-		this.encoding = context.getInitParameter("encoding");
-
 		// 1. 사용자 입력정보 추출
-		request.setCharacterEncoding(encoding);
 		String title = request.getParameter("title");
 		String seq = request.getParameter("seq");
 		String content = request.getParameter("content");

@@ -23,11 +23,7 @@ public class deleteBoardServlet extends HttpServlet{
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 	throws ServletException, IOException {
-		// 0. 상태 정보 체크
-		HttpSession session = request.getSession();
-		UserVO user = (UserVO) session.getAttribute("user");
-		if(user == null) response.sendRedirect("login.html");
-		
+
 		// 1. 사용자 입력정보 추출
 		String seq = request.getParameter("seq");
 		

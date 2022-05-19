@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.my.biz.user.common.JDBCUtil;
+import com.my.biz.user.filter.JDBCUtil;
 
 public class UserDAO {
 

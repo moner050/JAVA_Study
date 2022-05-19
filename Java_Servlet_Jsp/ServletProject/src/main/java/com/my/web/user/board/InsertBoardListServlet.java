@@ -20,11 +20,6 @@ public class InsertBoardListServlet extends HttpServlet{
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ServletContext context = getServletContext();
-		context.setAttribute("globalMessage", "Welcom to my Board");
-//		request.setCharacterEncoding(getServletContext().getInitParameter("encoding"));
-		String message = (String) context.getAttribute("globalMessage");
-		context.removeAttribute("globalMessage");
 		
 		// 1. 사용자 입력 정보 추출
 		String title = request.getParameter("title");

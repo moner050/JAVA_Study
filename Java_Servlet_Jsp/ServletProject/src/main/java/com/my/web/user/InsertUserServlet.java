@@ -21,23 +21,12 @@ import com.my.biz.user.UserVO;
 			initParams = @WebInitParam(name = "encoding", value = "UTF-8"))
 public class InsertUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String encoding;
-
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		// ServletConfig 객체를 이용하여 Local-parameter 정보를 추출하여 멤버변수를 초기화한다. 
-		encoding = config.getInitParameter("encoding");
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("InsertUserServlet 실행");
-		
-		ServletContext context = getServletContext();
-		encoding = context.getInitParameter("encoding");
-		request.setCharacterEncoding(encoding);
 		
 		UserDAO userDAO = new UserDAO();
 		// 반드시 사용자 입력 정보를 추출하기 전에 인코딩 방식을 지정해줘야 한다.

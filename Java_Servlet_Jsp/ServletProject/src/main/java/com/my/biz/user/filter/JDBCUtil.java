@@ -1,4 +1,4 @@
-package com.my.biz.user.common;
+package com.my.biz.user.filter;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
