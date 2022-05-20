@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,15 +25,34 @@ public class getBoardListServlet extends HttpServlet{
 		// 0. 상태 정보 체크
 		HttpSession session = request.getSession();
 		UserVO user = (UserVO) session.getAttribute("user");
+		ServletContext context = getServletContext();
 		
 		String select = "";
-		String id = "";
-		// 파라미터 받아오기
-		select = request.getParameter("select");
-		if(select != null && select.equals("제목")) select = "title";
-		else if(select != null && select.equals("내용")) select = "content";
-		id = request.getParameter("id");
+		String text = "";
+		
+		if(request.getParameter("select") != null)
+		{
+			context.setAttribute("select", request.getParameter("select"));
+			context.setAttribute("text", request.getParameter("text"));
 			
+			if(context.getAttribute("select").equals("제목"))
+			{
+				context.setAttribute("select", "title");
+				select = "title";
+			}
+			else if(context.getAttribute("select").equals("내용"))
+			{
+				context.setAttribute("select", "content");
+				select = "content";
+			}
+			text = (String) context.getAttribute("text");
+		}
+		else 
+		{
+			select = "";
+			text = "";
+		}
+
 		// 1. DB 연동 처리
 		BoardVO vo = new BoardVO();
 		BoardDAO boardDAO = new BoardDAO();
@@ -62,7 +82,7 @@ public class getBoardListServlet extends HttpServlet{
 		out.println("<option>제목");
 		out.println("<option>내용");
 		out.println("</select>");
-		out.println("<input type='text' name='id' size='20' value='" + id + "'/>");
+		out.println("<input type='text' name='text' size='20' value='" + context.getAttribute("text") + "'/>");
 		out.println("<input type='submit' value='검색' />");
 		out.println("</td>");
 		out.println("</tr>");
@@ -77,9 +97,9 @@ public class getBoardListServlet extends HttpServlet{
 			
 		for(BoardVO board : boardList)
 		{
-			if(select != null && select.equals("title"))
+			if(context.getAttribute("select") != null && context.getAttribute("select").equals("title"))
 			{
-				if(board.getTitle().contains(id))
+				if(board.getTitle().contains(text))
 				{
 					out.println("<tr align='center'>");
 					out.println("<td>" + board.getSeq() + "</td>");
@@ -89,9 +109,9 @@ public class getBoardListServlet extends HttpServlet{
 					out.println("<td>" + board.getCnt() + "</td>");
 				}
 			}
-			else if(select != null && select.equals("content"))
+			else if(context.getAttribute("select") != null && context.getAttribute("select").equals("content"))
 			{
-				if(board.getContent().contains(id))
+				if(board.getContent().contains(text))
 				{
 					out.println("<tr align='center'>");
 					out.println("<td>" + board.getSeq() + "</td>");
@@ -103,7 +123,7 @@ public class getBoardListServlet extends HttpServlet{
 			}
 			else
 			{
-				if(select == null)
+				if(select.equals(""))
 				{
 					out.println("<tr align='center'>");
 					out.println("<td>" + board.getSeq() + "</td>");
