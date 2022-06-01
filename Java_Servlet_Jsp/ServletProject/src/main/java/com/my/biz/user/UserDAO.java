@@ -7,36 +7,69 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.my.biz.user.filter.JDBCUtil;
+import com.my.biz.common.JDBCUtil;
 
+// Data Access Object 클래스 
 public class UserDAO {
-
+	// JDBC 관련 변수 
 	private Connection conn = null;
-	private PreparedStatement ps = null;
+	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	
-	// 회원 목록
-	private final String USER_LIST = "select * from USERS order by id desc";
-	// 회원 조회
-	private final String USER_GET = "select * from USERS where id = ?";
-	// 회원 등록
-	private final String USER_INSERT = "INSERT INTO USERS VALUES(?, ?, ?, ?)";
-	
-    // 회원 목록
-    public List<UserVO> getUserList()
-    {
-    	List<UserVO> userList = new ArrayList<UserVO>();
-    	try 
-    	{
-    		int size = 0;
-    		StringBuilder sb = new StringBuilder();
-    		conn = JDBCUtil.getConnection();
-			ps = conn.prepareStatement(USER_LIST);
-			rs = ps.executeQuery();
+	// STUDENT 테이블 관련 SQL 명령어
+	private final String USER_INSERT = "insert into users(id, password, name, role) values(?, ?, ?, ?)";
+	private final String USER_LIST   = "select * from users order by id desc";
+	private final String USER_GET    = "select * from users where id = ?";
 
-			sb.append("현재 등록된 회원 목록입니다.\n");
-			while(rs.next())
-			{	
+	// USER 테이블 관련 CRUD 메소드
+	// 회원 가입
+	public void insertUser(UserVO vo) {
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(USER_INSERT);
+			stmt.setString(1, vo.getId());
+			stmt.setString(2, vo.getPassword());
+			stmt.setString(3, vo.getName());
+			stmt.setString(4, vo.getRole());
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(stmt, conn);
+		}
+	}
+	
+	// 회원 상세 조회
+	public UserVO getUser(UserVO vo) {
+		UserVO user = null;
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(USER_GET);
+			stmt.setString(1, vo.getId());
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				user = new UserVO();
+				user.setId(rs.getString("ID"));
+				user.setPassword(rs.getString("PASSWORD"));
+				user.setName(rs.getString("NAME"));
+				user.setRole(rs.getString("ROLE"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+		return user;
+	}
+	
+	// 회원 목록 조회
+	public List<UserVO> getUserList() {
+		List<UserVO> userList = new ArrayList<UserVO>();
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(USER_LIST);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
 				UserVO user = new UserVO();
 				user.setId(rs.getString("ID"));
 				user.setPassword(rs.getString("PASSWORD"));
@@ -44,70 +77,11 @@ public class UserDAO {
 				user.setRole(rs.getString("ROLE"));
 				userList.add(user);
 			}
-			
-			if(size < 1) System.out.println("등록된 회원이 없습니다.");
-			else System.out.println(sb);
-
-		} 
-    	catch (SQLException e) { e.printStackTrace(); }
-    	finally
-    	{	
-    		JDBCUtil.close(rs, ps, conn);
-    	}
-    	return userList;
-    }
-    
-    // 회원 상세 목록
-    public UserVO getUser(UserVO vo) 
-    {	
-    	UserVO user = null;
-    	try 
-    	{
-    		conn = JDBCUtil.getConnection();
-			ps = conn.prepareStatement(USER_GET);
-			ps.setString(1, vo.getId());
-			rs = ps.executeQuery();
-			if(rs.next())
-			{
-				user = new UserVO();
-				user.setId(rs.getString("ID"));
-				user.setPassword(rs.getString("PASSWORD"));
-				user.setName(rs.getString("NAME"));
-				user.setRole(rs.getString("ROLE"));
-			}
-    	} 
-    	catch (SQLException e) 
-    	{
-    		e.printStackTrace();
-    	} 
-    	finally 
-    	{
-    		JDBCUtil.close(ps, conn);
-    	}
-    	return user;
-    }
-    
-    // 회원 등록
-	public void insertUsers(UserVO vo)
-	{
-		try
-		{
-    		conn = JDBCUtil.getConnection();
-			ps = conn.prepareStatement(USER_INSERT);
-			ps.setString(1, vo.getId());
-			ps.setString(2, vo.getPassword());
-			ps.setString(3, vo.getName());
-			ps.setString(4, vo.getRole());
-			ps.executeUpdate();
-		}
-		catch(SQLException e)
-		{
+		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
 		}
-    	finally 
-    	{
-    		JDBCUtil.close(ps, conn);
-    	}
+		return userList;
 	}
-	
 }

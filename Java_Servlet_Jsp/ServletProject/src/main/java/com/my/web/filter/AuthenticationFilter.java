@@ -1,4 +1,4 @@
-package com.my.biz.user.filter;
+package com.my.web.filter;
 
 import java.io.IOException;
 
@@ -15,21 +15,24 @@ import javax.servlet.http.HttpSession;
 
 import com.my.biz.user.UserVO;
 
-
-@WebFilter(urlPatterns = {"/getBoardList.do", "/getBoard.do", "/deleteBoard.do"})
+@WebFilter(urlPatterns = {"/", "/getBoard.jsp", "/deleteBoard_proc.jsp"})
 public class AuthenticationFilter extends HttpFilter implements Filter {
-	
-    public AuthenticationFilter() {
-    	System.out.println("===> AuthenticationFilter 생성");
-    }
-	
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	private static final long serialVersionUID = 1L;
 
+//	public AuthenticationFilter() {
+//        System.out.println("===> AuthenticationFilter 생성");
+//  }    
+
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		// 세션 체크
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpSession session = req.getSession();
 		UserVO user = (UserVO) session.getAttribute("user");
-		if(user == null) res.sendRedirect("login.html");
-		else chain.doFilter(request, response);
+		if(user == null) {
+			res.sendRedirect("/");
+		} else {		
+			chain.doFilter(request, response);
+		}
 	}
 }

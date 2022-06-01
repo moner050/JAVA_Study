@@ -2,16 +2,10 @@ package com.my.biz.board;
 
 import java.sql.Date;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
 public class BoardVO {
-
 	private int seq;
 	private String title;
 	private String writer;
@@ -19,4 +13,7 @@ public class BoardVO {
 	private Date regDate;
 	private int cnt;
 	
+	// 검색 관련 멤버변수
+	private String searchCondition;
+	private String searchKeyword;
 }

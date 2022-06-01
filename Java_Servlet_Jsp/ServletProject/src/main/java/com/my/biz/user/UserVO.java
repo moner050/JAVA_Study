@@ -2,6 +2,7 @@ package com.my.biz.user;
 
 import lombok.Data;
 
+// VO(Value Object) 클래스
 @Data
 public class UserVO {
 	private String id;
