@@ -19,5 +19,18 @@ public class MainBuilder {
 
     System.out.println(lee.toString());
 
+    // 롬복 빌더 어노테이션을 이용해 인스턴스 생성하기
+    LombokMember kim = LombokMember.builder()
+        .id("kimMaeMi")
+        .name("매미킴")
+        .password("kmm1234")
+        .age(17)
+        .gender("male")
+        .address("서울역")
+        .job("개그맨")
+        .build();
+
+    System.out.println(kim.toString());
+
   }
 }
