@@ -42,24 +42,29 @@ public class BJ_2108 {
         }
 
         for (int i = 0; i < cnt.length; i++) {
+            // 만약 cnt 가 max 값과 같은데
             if(cnt[i] == max){
+                // i가 4000보다 크면 음수이기 때문에
                 if(i > 4000){
                     int j = i;
+                    // 변수 j 에 i 를 넣어주고 4000을 빼준다음 음수 만들어주기.
                     j -= 4000;
                     j *= -1;
+                    // 리스트에 추가.
                     numList.add(j);
-                }
+                }// 양수면 그냥 추가
                 else numList.add(i);
             }
         }
-
+        // 오름차순으로 정렬시키기
         Collections.sort(numList);
-
+        // 만약 최빈값이 여러개이면 그중 가장 작은 값 리턴
         if(numList.size() > 1) return numList.get(1);
-        else return numList.get(0);
+        else return numList.get(0); // 한개이면 0 리턴.
 
     }
 
+    // 범위값
     public static int range(int[] arr){
         return arr[arr.length-1] - arr[0];
     }
@@ -70,10 +75,11 @@ public class BJ_2108 {
 
         int N = Integer.parseInt(br.readLine());
         int[] numList = new int[N];
-        for (int i = 0; i < N; i++) {
+        // numList 에 N 번 입력받아 넣어주기기
+       for (int i = 0; i < N; i++) {
             numList[i] = Integer.parseInt(br.readLine());
         }
-
+        // 오름차순 정렬해주기
         Arrays.sort(numList);
 
         bw.write(avg(numList) + "\n");
