@@ -26,7 +26,7 @@ public class BJ_11651 {
             numList[i][1] = Integer.parseInt(num.nextToken());
         }
 
-        // 두번째 원소가 같으면 첫번째 원소끼리 비교. 아니면 첫번째 원소끼리 비교.
+        // 두번째 원소가 같으면 첫번째 원소끼리 비교. 아니면 두번째 원소끼리 비교.
         Arrays.sort(numList, (e1, e2) -> {
             if(e1[1] == e2[1]) return e1[0] - e2[0];
             else return e1[1] - e2[1];

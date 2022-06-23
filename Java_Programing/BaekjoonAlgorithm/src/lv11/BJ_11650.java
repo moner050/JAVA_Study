@@ -19,7 +19,7 @@ public class BJ_11650 {
             coordinate[i][1] = temp[1];
         }
 
-        //
+        // 첫번째 원소가 같으면 두번째 원소끼리 비교, 아니면 첫번째 원소끼리 비교
         Arrays.sort(coordinate, (e1, e2) -> {
             if(e1[0] == e2[0]) return e1[1] - e2[1];
             else return e1[0] - e2[0];
