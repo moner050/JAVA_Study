@@ -11,7 +11,7 @@ public class BJ_2477 {
         StringTokenizer st;
 
         int N = Integer.parseInt(br.readLine());
-        int[] arr = new int[N];
+        int[] arr = new int[6];
 
         int maxR = 0, maxL = 0;
         int indexR = 0, indexL = 0;
