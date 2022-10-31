@@ -32,8 +32,8 @@ public class FruitSeller_135808 {
             for (int i = 0; i < m; i++) {
                 list.add(stack.pop());
             }
-            int max = Collections.min(list);
-            answer += (max * m);
+            int min = Collections.min(list);
+            answer += (min * m);
         }
         return answer;
     }
