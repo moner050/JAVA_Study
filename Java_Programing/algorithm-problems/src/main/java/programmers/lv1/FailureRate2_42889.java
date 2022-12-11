@@ -57,8 +57,6 @@ class Stage implements Comparable<Stage> {
 
     @Override
     public int compareTo(Stage o) {
-        if(failure < o.failure) return -1;
-        else if(failure > o.failure) return 1;
-        return 0;
+        return (int)(this.failure - o.failure);
     }
 }
