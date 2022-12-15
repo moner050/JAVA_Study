@@ -14,10 +14,11 @@ public class FruitSeller_135808 {
         int m = 3;
         int[] score = {4, 1, 2, 2, 4, 4, 4, 4, 1, 2, 4, 2};
 
-        System.out.println(solution(k, m, score));
+        System.out.println(solution1(k, m, score));
+        System.out.println(solution2(k, m, score));
     }
 
-    public static int solution(int k, int m, int[] score) {
+    public static int solution1(int k, int m, int[] score) {
         int answer = 0;
         Arrays.sort(score);
 
@@ -36,5 +37,17 @@ public class FruitSeller_135808 {
             answer += (min * m);
         }
         return answer;
+    }
+
+    public static int solution2(int k, int m, int[] score) {
+        int result = 0;
+
+        Arrays.sort(score);
+
+        for (int i = score.length; i >= m; i -= m) {
+            result += score[i - m] * m;
+        }
+
+        return result;
     }
 }
