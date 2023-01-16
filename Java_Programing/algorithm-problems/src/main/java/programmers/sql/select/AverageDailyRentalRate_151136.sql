@@ -17,7 +17,7 @@ VALUES('세단', 16000, '가죽시트,열선시트,후방카메라'),
       ('SUV', 22000, '주차감지센서,후방카메라,가죽시트')
 ---
 
---- DML
+--- DML(SELECT)
 SELECT ROUND(AVG(DAILY_FEE), 0) AS AVERAGE_FEE
 FROM CAR_RENTAL_COMPANY_CAR
 WHERE CAR_TYPE = 'SUV'
