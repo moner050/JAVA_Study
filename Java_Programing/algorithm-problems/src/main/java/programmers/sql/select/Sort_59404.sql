@@ -1,0 +1,27 @@
+-- 여러 기준으로 정렬하기
+-- https://school.programmers.co.kr/learn/courses/30/lessons/59404
+
+--- DDL
+CREATE TABLE ANIMAL_INS (
+    ANIMAL_ID VARCHAR(255) PRIMARY KEY NOT NULL,
+    ANIMAL_TYPE VARCHAR(255) NOT NULL,
+    DATETIME DATETIME NOT NULL,
+    INTAKE_CONDITION VARCHAR(255) NOT NULL,
+    NAME VARCHAR(255),
+    SEX_UPON_INTAKE VARCHAR(255) NOT NULL
+);
+---
+
+--- DML(INSERT)
+INSERT INTO ANIMAL_INS(ANIMAL_ID, ANIMAL_TYPE, DATETIME, INTAKE_CONDITION, NAME, SEX_UPON_INTAKE)
+VALUES('A349996', '	Cat', '2018-01-22 14:32:00', 'Normal', 'Sugar', 'Neutered Male'),
+      ('A350276', '	Cat', '2017-08-13 13:50:00', 'Normal', 'Jewel', 'Spayed Female'),
+      ('A350375', '	Dog', '2016-08-22 16:13:00', 'Injured', 'Raven', 'Spayed Female'),
+      ('A352555', '	Cat', '2015-11-19 13:41:00', 'Normal', 'Raven', 'Neutered Male');
+---
+
+--- DML(SELECT)
+SELECT ANIMAL_ID, NAME, DATETIME
+FROM ANIMAL_INS
+ORDER BY NAME ASC, DATETIME DESC;
+---
