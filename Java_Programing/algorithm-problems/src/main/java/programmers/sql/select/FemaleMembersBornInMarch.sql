@@ -1,0 +1,6 @@
+-- 3월에 태어난 여성 회원 목록 출력하기
+-- https://school.programmers.co.kr/learn/courses/30/lessons/131120
+SELECT MEMBER_ID, MEMBER_NAME, GENDER, DATE_FORMAT(DATE_OF_BIRTH, '%Y-%m-%d')
+FROM MEMBER_PROFILE
+WHERE DATE_OF_BIRTH LIKE '%-03-%' AND GENDER = 'W' AND NOT TLNO IS NULL
+ORDER BY MEMBER_ID ASC
