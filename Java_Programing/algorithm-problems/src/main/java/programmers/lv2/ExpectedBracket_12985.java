@@ -22,10 +22,7 @@ public class ExpectedBracket_12985 {
     }
 
     public static int nextNumber(int num) {
-        if(num % 2 == 1) num = num / 2 + 1;
-        else num /= 2;
-
-        return num;
+        return num % 2 == 1 ? num / 2 + 1 : num / 2;
     }
 
 }
