@@ -1,0 +1,25 @@
+-- 중성화 여부 파악하기
+-- https://school.programmers.co.kr/learn/courses/30/lessons/59409
+
+--- DDL
+CREATE TABLE ANIMAL_INS (
+    ANIMAL_ID VARCHAR(255) PRIMARY KEY,
+    ANIMAL_TYPE VARCHAR(255) NOT NULL,
+    DATETIME DATETIME NOT NULL,
+    INTAKE_CONDITION VARCHAR(255) NOT NULL,
+    NAME VARCHAR(255),
+    SEX_UPON_INTAKE VARCHAR(255) NOT NULL
+);
+---
+
+--- DML(INSERT)
+INSERT INTO ANIMAL_INS(ANIMAL_ID, ANIMAL_TYPE, DATETIME, INTAKE_CONDITION, NAME, SEX_UPON_INTAKE)
+VALUES('A355753', 'Dog', '2015-09-10 13:14:00', 'Normal', 'Elijah', 'Neutered Male'),
+      ('A373219', 'Cat', '2014-07-29 11:43:00', 'Normal', 'Ella', 'Spayed Female'),
+      ('A382192', 'Dog', '2015-03-13 13:14:00', 'Normal', 'Maxwell 2', 'Intact Male');
+---
+
+--- DML(SELECT)
+SELECT ANIMAL_ID, NAME, (CASE WHEN SEX_UPON_INTAKE LIKE '%Neutered%' OR SEX_UPON_INTAKE LIKE '%Spayed%' THEN 'O' ELSE 'X' END) AS '중성화'
+FROM ANIMAL_INS;
+---
