@@ -1,0 +1,27 @@
+-- 이름이 없는 동물의 아이디
+-- https://school.programmers.co.kr/learn/courses/30/lessons/59039
+
+--- DDL
+CREATE TABLE ANIMAL_INS (
+    ANIMAL_ID VARCHAR(255) PRIMARY KEY,
+    ANIMAL_TYPE VARCHAR(255) NOT NULL,
+    DATETIME DATETIME NOT NULL,
+    INTAKE_CONDITION VARCHAR(255) NOT NULL,
+    NAME VARCHAR(255),
+    SEX_UPON_INTAKE VARCHAR(255) NOT NULL
+);
+---
+
+--- DML(INSERT)
+INSERT INTO ANIMAL_INS(ANIMAL_ID, ANIMAL_TYPE, DATETIME, INTAKE_CONDITION, NAME, SEX_UPON_INTAKE)
+VALUES('A368930', 'Dog', '2014-06-08 13:20:00', 'Normal', NULL, 'Spayed Female'),
+      ('A524634', 'Dog', '2015-01-02 18:54:00', 'Normal', '*Belle', 'Intact Female'),
+      ('A465637', 'Dog', '2017-06-04 08:17:00', 'Injured', '*Commander', 'Neutered Male');
+---
+
+--- DML(SELECT)
+SELECT ANIMAL_ID
+FROM ANIMAL_INS
+WHERE NAME IS NULL
+ORDER BY ANIMAL_ID ASC;
+---
