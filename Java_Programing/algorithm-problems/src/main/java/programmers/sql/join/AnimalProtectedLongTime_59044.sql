@@ -1,0 +1,46 @@
+-- 오랜 기간 보호한 동물(1)
+-- https://school.programmers.co.kr/learn/courses/30/lessons/59044
+
+--- DDL
+CREATE TABLE ANIMAL_INS (
+    ANIMAL_ID VARCHAR(255) PRIMARY KEY,
+    ANIMAL_TYPE VARCHAR(255) NOT NULL,
+    DATETIME DATETIME NOT NULL,
+    INTAKE_CONDITION VARCHAR(255) NOT NULL,
+    NAME VARCHAR(255),
+    SEX_UPON_INTAKE VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE ANIMAL_OUTS (
+     ANIMAL_ID VARCHAR(255) PRIMARY KEY,
+     ANIMAL_TYPE VARCHAR(255) NOT NULL,
+     DATETIME DATETIME NOT NULL,
+     NAME VARCHAR(255),
+     SEX_UPON_OUTCOME VARCHAR(255) NOT NULL
+);
+---
+
+--- DML(INSERT)
+INSERT INTO ANIMAL_INS(ANIMAL_ID, ANIMAL_TYPE, DATETIME, INTAKE_CONDITION, NAME, SEX_UPON_INTAKE)
+VALUES('A354597', 'Cat', '2014-05-02 12:16:00', 'Normal', 'Ariel', 'Spayed Female'),
+      ('A373687', 'Dog', '2014-03-20 12:31:00', 'Normal', 'Rosie', 'Spayed Female'),
+      ('A412697', 'Dog', '2016-01-03 16:25:00', 'Normal', 'Jackie', 'Neutered Male'),
+      ('A413789', 'Dog', '2016-04-19 13:28:00', 'Normal', 'Benji', 'Spayed Female'),
+      ('A414198', 'Dog', '2015-01-29 15:01:00', 'Normal', 'Shelly', 'Spayed Female'),
+      ('A368930', 'Dog', '2014-06-08 13:20:00', 'Normal', NULL, 'Spayed Female');
+
+INSERT INTO ANIMAL_OUTS(ANIMAL_ID, ANIMAL_TYPE, DATETIME, NAME, SEX_UPON_OUTCOME)
+VALUES('A354597', 'Cat', '2014-05-02 12:16:00', 'Ariel', 'Spayed Female'),
+      ('A373687', 'Dog', '2014-03-20 12:31:00', 'Rosie', 'Spayed Female'),
+      ('A368930', 'Dog', '2014-06-08 13:20:00', NULL, 'Spayed Female');
+---
+
+--- DML(SELECT)
+SELECT A.NAME, A.DATETIME
+FROM ANIMAL_INS AS A
+LEFT OUTER JOIN ANIMAL_OUTS AS B
+ON A.ANIMAL_ID = B.ANIMAL_ID
+WHERE B.ANIMAL_ID IS NULL
+ORDER BY A.DATETIME ASC
+LIMIT 3;
+---
